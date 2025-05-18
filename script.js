@@ -1133,7 +1133,7 @@ function updateNavbarForLoggedInUser(username) {
             // Clear results when loading
             document.getElementById("result-summary").style.display = "none";
             document.getElementById("schedule-display").innerHTML =
-              '<p style="text-align: center; color: #999;">Klik "Hitung Jadwal & Cek Konflik" untuk melihat visualisasi.</p>';
+              '<p style="text-align: center; color: #ffffff;">Klik "Hitung Jadwal & Cek Konflik" untuk melihat visualisasi.</p>';
           } catch (e) {
             console.error("Gagal memuat data:", e);
             showAlert(
