@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartSkin Planner - Routine Planner</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css_style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <span>SmartSkin Planner</span>
+      </div>
+      <button
+        class="hamburger-menu"
+        id="hamburgerMenu"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <div class="wrapper-kanan"></div>
+      <div class="nav-links" id="navLinksContainer">
+        <a href="index.html" class="nav-link">Dashboard</a>
+        <a href="planner.html" class="nav-link">Routine Planner</a>
+        <a href="scincare.html" class="nav-link">Skincare Library</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="login.html" class="nav-link" id="loginNav">login</a>
+        <!-- Ini akan tampil jika user sudah login -->
+        <div class="user-menu" id="userMenu" style="display: none">
+          <div class="user-name">👤 <span id="usernameDisplay">User</span></div>
+          <div class="user-dropdown">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+          </div>
+        </div>
+        <!-- Ini akan tetap tampil kalau belum login -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- Routine Planner Content -->
+      <div class="page active" id="planner">
+        <h1>📅 Routine Planner</h1>
+
+        <!-- Input Section - Now Directly Under #planner -->
+        <div class="calculator-section" id="planner-input">
+          <!-- Added ID for clarity -->
+          <h2>Masukkan Detail Produk</h2>
+
+          <!-- All the checkboxes groups (Kimiawi, Alami, Lainnya) go here -->
+          <div class="checkbox-group" id="ingredient-checkboxes">
+            <label style="margin-bottom: 15px; display: block"
+              >Pilih Bahan Aktif Utama (Bisa lebih dari satu):</label
+            >
+            <!-- Label outside columns -->
+
+            <div class="checkbox-columns-container">
+              <!-- NEW Flex Container -->
+
+              <!-- Left Column: Kimiawi -->
+              <div class="checkbox-column checkbox-column-left">
+                <h4
+                  style="
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                    color: var(--primary);
+                  "
+                >
+                  Bahan Aktif Kimiawi
+                </h4>
+                <!-- All Chemical Ingredient Checkboxes -->
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-retinol"
+                    name="ingredient"
+                    value="retinol"
+                  /><label for="ingredient-retinol">Retinol (0.2%-2%)</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-retinal"
+                    name="ingredient"
+                    value="retinal"
+                  /><label for="ingredient-retinal"
+                    >Retinal (Retinaldehyde)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-adapalene"
+                    name="ingredient"
+                    value="adapalene"
+                  /><label for="ingredient-adapalene"
+                    >Adapalene (0.1%-0.3%)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-tretinoin"
+                    name="ingredient"
+                    value="tretinoin"
+                  /><label for="ingredient-tretinoin"
+                    >Tretinoin (Rx, 0.025%-0.1%)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-vitaminc"
+                    name="ingredient"
+                    value="vitaminc"
+                  /><label for="ingredient-vitaminc"
+                    >Vitamin C (LAA/Deriv.)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-vitamine"
+                    name="ingredient"
+                    value="vitamine"
+                  /><label for="ingredient-vitamine"
+                    >Vitamin E (Tocopherol)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-ferulic"
+                    name="ingredient"
+                    value="ferulicacid"
+                  /><label for="ingredient-ferulic">Ferulic Acid</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-aha"
+                    name="ingredient"
+                    value="aha"
+                  /><label for="ingredient-aha">AHA (Glycolic, Lactic)</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-bha"
+                    name="ingredient"
+                    value="bha"
+                  /><label for="ingredient-bha">BHA (Salicylic Acid)</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-pha"
+                    name="ingredient"
+                    value="pha"
+                  /><label for="ingredient-pha"
+                    >PHA (Gluconolactone, etc)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-ahabhapha"
+                    name="ingredient"
+                    value="ahabhapha"
+                  /><label for="ingredient-ahabhapha"
+                    >AHA/BHA/PHA (Produk Kombinasi)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-niacinamide"
+                    name="ingredient"
+                    value="niacinamide"
+                  /><label for="ingredient-niacinamide"
+                    >Niacinamide (5%-10%)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-peptide"
+                    name="ingredient"
+                    value="peptide"
+                  /><label for="ingredient-peptide">Peptide</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-azelaic"
+                    name="ingredient"
+                    value="azelaicacid"
+                  /><label for="ingredient-azelaic"
+                    >Azelaic Acid (10%-20%)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-arbutin"
+                    name="ingredient"
+                    value="arbutin"
+                  /><label for="ingredient-arbutin"
+                    >Alpha Arbutin (2%-5%)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-tranexamic"
+                    name="ingredient"
+                    value="tranexamic"
+                  /><label for="ingredient-tranexamic"
+                    >Tranexamic Acid (2%-5%)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-benzoyl"
+                    name="ingredient"
+                    value="benzoylperoxide"
+                  /><label for="ingredient-benzoyl"
+                    >Benzoyl Peroxide (2.5%-10%)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-sulfur"
+                    name="ingredient"
+                    value="sulfur"
+                  /><label for="ingredient-sulfur">Sulfur (Acne)</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-ha"
+                    name="ingredient"
+                    value="hyaluronicacid"
+                  /><label for="ingredient-ha">Hyaluronic Acid</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-panthenol"
+                    name="ingredient"
+                    value="panthenol"
+                  /><label for="ingredient-panthenol">Panthenol (B5)</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-ceramide"
+                    name="ingredient"
+                    value="ceramide"
+                  /><label for="ingredient-ceramide">Ceramides</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-betaglucan"
+                    name="ingredient"
+                    value="betaglucan"
+                  /><label for="ingredient-betaglucan">Beta-Glucan</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-glycerin"
+                    name="ingredient"
+                    value="glycerin"
+                  /><label for="ingredient-glycerin">Glycerin</label>
+                </div>
+              </div>
+              <!-- End Left Column -->
+
+              <!-- Right Column: Alami -->
+              <div class="checkbox-column checkbox-column-right">
+                <h4
+                  style="
+                    margin-top: 0;
+                    margin-bottom: 10px;
+                    color: var(--primary);
+                  "
+                >
+                  Bahan Aktif Alami
+                </h4>
+                <!-- All Natural Ingredient Checkboxes -->
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-bakuchiol"
+                    name="ingredient"
+                    value="bakuchiol"
+                  /><label for="ingredient-bakuchiol"
+                    >Bakuchiol (0.5%-2%)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-licorice"
+                    name="ingredient"
+                    value="licoriceroot"
+                  /><label for="ingredient-licorice"
+                    >Licorice Root Extract</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-squalane"
+                    name="ingredient"
+                    value="squalane"
+                  /><label for="ingredient-squalane">Squalane</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-centella"
+                    name="ingredient"
+                    value="centella"
+                  /><label for="ingredient-centella"
+                    >Centella Asiatica (Cica)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-greentea"
+                    name="ingredient"
+                    value="greentea"
+                  /><label for="ingredient-greentea">Green Tea Extract</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-allantoin"
+                    name="ingredient"
+                    value="allantoin"
+                  /><label for="ingredient-allantoin">Allantoin</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-chamomile"
+                    name="ingredient"
+                    value="chamomile"
+                  /><label for="ingredient-chamomile">Chamomile Extract</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-willowbark"
+                    name="ingredient"
+                    value="willowbark"
+                  /><label for="ingredient-willowbark"
+                    >Willow Bark Extract (Natural BHA)</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-rosehip"
+                    name="ingredient"
+                    value="rosehipoil"
+                  /><label for="ingredient-rosehip">Rosehip Oil</label>
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-seabuckthorn"
+                    name="ingredient"
+                    value="seabuckthornoil"
+                  /><label for="ingredient-seabuckthorn"
+                    >Sea Buckthorn Oil</label
+                  >
+                </div>
+                <div class="checkbox-item">
+                  <input
+                    type="checkbox"
+                    id="ingredient-ginseng"
+                    name="ingredient"
+                    value="ginseng"
+                  /><label for="ingredient-ginseng">Ginseng Extract</label>
+                </div>
+              </div>
+              <!-- End Right Column -->
+            </div>
+            <!-- End Flex Container -->
+
+            <!-- Note below columns -->
+            <small
+              class="checkbox-note"
+              style="margin-top: 15px; display: block"
+            >
+              Planner akan mengecek potensi konflik antar bahan aktif yang
+              dipilih...
+            </small>
+          </div>
+          <!-- End of checkbox-group -->
+
+          <!-- PENJELASAN TAMBAHAN UNTUK KONSENTRASI -->
+          <p
+            style="
+              font-size: 13px;
+              color: var(--text-light);
+              margin-bottom: 5px;
+              margin-top: 20px;
+              line-height: 1.5;
+            "
+          >
+            Masukkan perkiraan persentase (%) dari bahan aktif terkuat atau
+            utama yang Anda pilih (misal: jika Anda memilih Retinol 0.5% dan
+            Vitamin C 10%, Anda bisa masukkan 10).
+          </p>
+
+          <label for="concentration">Konsentrasi Umum (%):</label>
+          <input
+            type="number"
+            id="concentration"
+            min="0"
+            max="30"
+            step="0.1"
+            value="0.5"
+          />
+          <!-- min diubah ke 0 -->
+          <small
+            style="
+              display: block;
+              margin-top: -10px;
+              margin-bottom: 15px;
+              color: var(--text-light);
+            "
+            >Jika persentase tidak relevan atau tidak diketahui, gunakan nilai 0
+            atau default (0,5).</small
+          >
+
+          <label for="startDay"
+            >Hari Mulai (Hari 1 dimulai dari hari Minggu pada minggu
+            pertama):</label
+          >
+          <input type="number" id="startDay" min="1" value="1" />
+
+          <label for="tolerance">Toleransi Kulit Anda (1-10):</label>
+          <input type="number" id="tolerance" min="1" max="10" value="5" />
+          <small
+            style="
+              display: block;
+              margin-top: -10px;
+              margin-bottom: 15px;
+              color: var(--text-light);
+            "
+            >(1 = Sangat Sensitif, 10 = Sangat Toleran)</small
+          >
+
+          <button class="btn-primary" onclick="calculateRoutine()">
+            Hitung Jadwal & Cek Konflik
+          </button>
+          <button class="btn-secondary" onclick="saveRoutineData()">
+            Simpan Data
+          </button>
+          <button class="btn-secondary" onclick="loadRoutineData()">
+            Muat Data
+          </button>
+        </div>
+        <!-- End of calculator-section -->
+
+        <!-- Output Section - NEW Structure -->
+        <div class="planner-output-section" id="planner-output">
+          <!-- Added ID for clarity -->
+
+          <!-- Result Summary (Moved Here) -->
+          <div id="result-summary" style="margin-bottom: 30px">
+            <!-- JS will populate this -->
+          </div>
+
+          <!-- Schedule Visualization -->
+          <div class="schedule-display-container">
+            <!-- Optional wrapper if needed -->
+            <h2>Visualisasi Jadwal & Peringatan</h2>
+            <p style="color: #ffffff; margin-bottom: 15px">
+              Jadwal adalah contoh awal berdasarkan Toleransi & Konsentrasi.
+              Sesuaikan frekuensi berdasarkan reaksi kulit dan perhatikan
+              peringatan konflik pada ringkasan di atas.
+            </p>
+            <div id="schedule-display">
+              <!-- Calendar will be generated here by JS -->
+              <p style="color: #ffffff; margin-bottom: 15px">
+                Pilih bahan aktif dan klik "Hitung Jadwal" untuk melihat
+                ringkasan dan visualisasi.
+              </p>
+            </div>
+          </div>
+          <!-- End of schedule-display-container -->
+        </div>
+        <!-- End of planner-output-section -->
+      </div>
+      <!-- End of Planner Page -->
+    </div>
+
+    <!-- Footer (No changes needed here) -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>SmartSkin Planner</h3>
+          <p>Perencanaan routine skincare berbasis logika sederhana.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Navigasi</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="planner.html">Routine Planner</a></li>
+            <li><a href="scincare.html">Skincare Library</a></li>
+          </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="liblary_scincar.js"></script>
+  </body>
+</html>

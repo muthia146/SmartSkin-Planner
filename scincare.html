@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartSkin Planner - Skincare Library</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css_style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <span>SmartSkin Planner</span>
+      </div>
+      <button
+        class="hamburger-menu"
+        id="hamburgerMenu"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <div class="wrapper-kanan"></div>
+      <div class="nav-links" id="navLinksContainer">
+        <a href="index.html" class="nav-link">Dashboard</a>
+        <a href="planner.html" class="nav-link">Routine Planner</a>
+        <a href="scincare.html" class="nav-link">Skincare Library</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="login.html" class="nav-link" id="loginNav">login</a>
+        <!-- Ini akan tampil jika user sudah login -->
+        <div class="user-menu" id="userMenu" style="display: none">
+          <div class="user-name">👤 <span id="usernameDisplay">User</span></div>
+          <div class="user-dropdown">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+          </div>
+        </div>
+        <!-- Ini akan tetap tampil kalau belum login -->
+      </div>
+    </nav>
+    <!-- Modal for Library Details -->
+    <div id="modalOverlay" class="modal-overlay" style="display: none"></div>
+    <!-- Modal for Library Details -->
+    <div id="detailModal" class="detail-modal" style="display: none">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">
+            <span id="modalIcon" class="modal-icon"></span>
+            <span id="modalTitle"></span>
+          </h2>
+          <span class="close-modal" onclick="closeModal()">×</span>
+        </div>
+
+        <div id="modalDescription" class="ingredient-detail"></div>
+
+        <div class="detail-section">
+          <h3>Manfaat Utama</h3>
+          <ul id="modalBenefits" class="benefits-list"></ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>Cara Penggunaan</h3>
+          <ul id="modalUsage" class="usage-list"></ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>Hal yang Perlu Diperhatikan</h3>
+          <ul id="modalWarnings" class="avoid-list"></ul>
+        </div>
+
+        <div class="highlight-box">
+          <p id="modalTips"></p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Skincare Library Page -->
+      <div class="page active" id="library">
+        <h1>📚 Skincare Library</h1>
+        <p class="intro-text">
+          Pelajari tentang berbagai bahan aktif skincare, manfaat, cara
+          penggunaan, dan hal yang perlu diperhatikan. Selalu perhatikan
+          kandungan spesifik pada produk dan aturan penggunaan bahan aktif.
+        </p>
+
+        <h2>🧪 Bahan Aktif Kimiawi (Synthetic)</h2>
+        <p class="category-description synthetic-description">
+          Produk perawatan kulit dengan bahan aktif sintesis yang menargetkan
+          masalah kulit tertentu. Lebih poten tetapi membutuhkan penggunaan yang
+          lebih hati-hati dan pemahaman akan cara kerjanya.
+        </p>
+        <div class="library-container">
+          <div class="ingredient-card">
+            <div class="ingredient-image">⭐</div>
+            <div class="ingredient-category">Retinoid</div>
+            <div class="ingredient-name">Retinol</div>
+            <p>
+              Turunan Vitamin A, efektif untuk anti-aging dan jerawat (0.2%-2%).
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Retinol', '⭐', 'Retinol adalah turunan Vitamin A yang populer untuk anti-aging dan jerawat. Bekerja dengan meningkatkan pergantian sel kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌟</div>
+            <div class="ingredient-category">Retinoid</div>
+            <div class="ingredient-name">Retinal (Retinaldehyde)</div>
+            <p>
+              Bentuk Vitamin A yang lebih poten dari retinol, lebih dekat ke
+              asam retinoat.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Retinal', '🌟', 'Retinaldehyde (Retinal) adalah prekursor langsung asam retinoat, lebih kuat dari retinol namun seringkali lebih bisa ditoleransi daripada tretinoin.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">💊</div>
+            <div class="ingredient-category">Retinoid (Rx/Obat)</div>
+            <div class="ingredient-name">Adapalene</div>
+            <p>
+              Retinoid sintetik generasi ketiga, sering untuk jerawat
+              (0.1%-0.3%).
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Adapalene', '💊', 'Adapalene adalah retinoid resep (di beberapa negara OTC) yang efektif untuk jerawat. Bekerja dengan menormalkan diferensiasi sel.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">⚕️</div>
+            <div class="ingredient-category">Retinoid (Rx/Obat)</div>
+            <div class="ingredient-name">Tretinoin</div>
+            <p>
+              Retinoid resep (asam retinoat murni), sangat poten (0.025%-0.1%).
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Tretinoin', '⚕️', 'Tretinoin adalah bentuk asam retinoat murni, sangat kuat dan memerlukan resep dokter. Standar emas untuk anti-aging dan jerawat.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍊</div>
+            <div class="ingredient-category">Vitamin C</div>
+            <div class="ingredient-name">Vitamin C</div>
+            <p>
+              Antioksidan kuat, mencerahkan kulit, dan melindungi dari kerusakan
+              lingkungan.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Vitamin C (Synthetic)', '🍊', 'L-ascorbic acid dan turunannya untuk mencerahkan dan melindungi dari radikal bebas.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌻</div>
+            <div class="ingredient-category">Vitamin E</div>
+            <div class="ingredient-name">Vitamin E</div>
+            <p>
+              Antioksidan yang menstabilkan vitamin C, melembabkan, dan
+              melindungi kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Vitamin E', '🌻', 'Tocopherol yang bekerja sinergis dengan vitamin C untuk perlindungan antioksidan ganda.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌾</div>
+            <div class="ingredient-category">Ferulic Acid</div>
+            <div class="ingredient-name">Ferulic Acid</div>
+            <p>
+              Menstabilkan vitamin C dan E, meningkatkan efektivitas
+              antioksidan.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Ferulic Acid', '🌾', 'Antioksidan yang membuat vitamin C lebih stabil dan efektif.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">💧</div>
+            <div class="ingredient-category">Hyaluronic Acid (Synthetic)</div>
+            <div class="ingredient-name">Hyaluronic Acid</div>
+            <p>Menghidrasi semua lapisan kulit dengan berat molekul berbeda.</p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Hyaluronic Acid (Synthetic)', '💧', 'Versi sintetis dengan stabilitas lebih baik dan berat molekul yang bisa diatur.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍎</div>
+            <div class="ingredient-category">AHA</div>
+            <div class="ingredient-name">AHA</div>
+            <p>
+              Mengangkat sel kulit mati, mencerahkan kulit, dan mengurangi tanda
+              penuaan.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('AHA', '🍎', 'Alpha Hydroxy Acids (seperti glycolic, lactic, mandelic acid) untuk eksfoliasi permukaan kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌲</div>
+            <div class="ingredient-category">BHA</div>
+            <div class="ingredient-name">BHA</div>
+            <p>
+              Membersihkan pori-pori, mengatasi jerawat, dan mengontrol produksi
+              minyak.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('BHA', '🌲', 'Beta Hydroxy Acid (salicylic acid) yang larut dalam minyak dan menembus pori-pori.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍶</div>
+            <div class="ingredient-category">PHA</div>
+            <div class="ingredient-name">PHA</div>
+            <p>Eksfoliasi lembut, cocok untuk kulit sensitif dan rosacea.</p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('PHA', '🍶', 'Poly Hydroxy Acids (seperti gluconolactone) yang lebih besar molekulnya sehingga kurang iritatif.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍎🌲🍶</div>
+            <div class="ingredient-category">AHA/BHA/PHA</div>
+            <div class="ingredient-name">AHA/BHA/PHA</div>
+            <p>
+              Gabungan expoliating agents yang sering dipakai di skincare untuk
+              memperbaiki tekstur & penampilan kulit
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('AHA/BHA/PHA', '🍎🌲🍶', 'AHA (Alpha Hydroxy Acid), BHA (Beta Hydroxy Acid), PHA (Poly Hydroxy Acid)')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">💧</div>
+            <div class="ingredient-category">Niacinamide</div>
+            <div class="ingredient-name">Niacinamide</div>
+            <p>
+              Mengurangi produksi minyak, mencerahkan noda, dan memperkuat skin
+              barrier.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Niacinamide', '💧', 'Vitamin B3 yang multitasking untuk berbagai masalah kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🧬</div>
+            <div class="ingredient-category">Peptides</div>
+            <div class="ingredient-name">Peptides</div>
+            <p>
+              Merangsang produksi kolagen, mengurangi kerutan, dan memperbaiki
+              elastisitas kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Peptides', '🧬', 'Rantai asam amino yang memberi sinyal pada kulit untuk memproduksi lebih banyak kolagen.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌾</div>
+            <div class="ingredient-category">Azelaic Acid</div>
+            <div class="ingredient-name">Azelaic Acid</div>
+            <p>
+              Mengatasi jerawat dan rosacea sekaligus mencerahkan
+              hiperpigmentasi.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Azelaic Acid', '🌾', 'Asam dikarboksilat yang bekerja pada jerawat dan hiperpigmentasi secara bersamaan.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">⚠️</div>
+            <div class="ingredient-category">Hydroquinone</div>
+            <div class="ingredient-name">Hydroquinone</div>
+            <p>
+              Depigmentasi kuat untuk hiperpigmentasi berat, harus dengan
+              pengawasan dokter.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Hydroquinone', '⚠️', 'Bahan pencerah paling efektif tetapi berpotensi iritasi jika tidak digunakan dengan benar.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🔬</div>
+            <div class="ingredient-category">Arbutin</div>
+            <div class="ingredient-name">Arbutin</div>
+            <p>
+              Pencerah kulit alami yang bekerja lambat tetapi aman untuk
+              penggunaan jangka panjang.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Arbutin', '🔬', 'Turunan hydroquinone alami dari tanaman bearberry dengan efek lebih ringan.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🧴</div>
+            <div class="ingredient-category">Tranexamic Acid</div>
+            <div class="ingredient-name">Tranexamic Acid</div>
+            <p>Mengatasi melasma dan hiperpigmentasi pasca inflamasi.</p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Tranexamic Acid', '🧴', 'Bahan pencerah baru yang bekerja pada jalur inflamasi penyebab hiperpigmentasi.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">💥</div>
+            <div class="ingredient-category">Benzoyl Peroxide</div>
+            <div class="ingredient-name">Benzoyl Peroxide</div>
+            <p>
+              Membunuh bakteri jerawat, mengeringkan jerawat aktif, dan mencegah
+              jerawat baru.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Benzoyl Peroxide', '💥', 'Antibakteri kuat untuk jerawat sedang hingga berat.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌋</div>
+            <div class="ingredient-category">Anti-Jerawat</div>
+            <div class="ingredient-name">Sulfur</div>
+            <p>
+              Anti-inflamasi dan antibakteri, sering untuk jerawat dan rosacea.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Sulfur', '🌋', 'Sulfur memiliki sifat keratolitik, antibakteri, dan anti-inflamasi yang membantu mengatasi jerawat dan kondisi kulit lainnya.')"
+            >
+              Detail Pengunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">💧</div>
+            <div class="ingredient-category">Hyaluronic Acid (Natural)</div>
+            <div class="ingredient-name">Hyaluronic Acid</div>
+            <p>
+              Menghidrasi kulit secara intensif, mengisi kerutan halus, dan
+              memperbaiki skin barrier.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Hyaluronic Acid (Natural)', '💧', 'Asam hialuronat alami yang mampu mengikat air hingga 1000x berat molekulnya.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌿</div>
+            <div class="ingredient-category">Pelembap/Penenang</div>
+            <div class="ingredient-name">Panthenol (B5)</div>
+            <p>
+              Provitamin B5, melembapkan, menenangkan, dan memperbaiki kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Panthenol', '🌿', 'Panthenol (Provitamin B5) dikenal karena sifatnya yang melembapkan, menenangkan, dan membantu perbaikan kulit.')"
+            >
+              Detail Pengunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🛡️</div>
+            <div class="ingredient-category">Ceramides</div>
+            <div class="ingredient-name">Ceramides</div>
+            <p>
+              Memperbaiki skin barrier, mengurangi iritasi, dan mengunci
+              kelembaban.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Ceramides', '🛡️', 'Lipid alami yang membentuk 50% komposisi skin barrier.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍄</div>
+            <div class="ingredient-category">Pelembap/Penenang</div>
+            <div class="ingredient-name">Beta-Glucan</div>
+            <p>Polisakarida, humektan kuat, menenangkan, dan antioksidan.</p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Beta-Glucan', '🍄', 'Beta-Glucan adalah humektan yang sangat baik, mampu menenangkan kulit, dan memiliki sifat antioksidan.')"
+            >
+              Detail Pengunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">💧</div>
+            <div class="ingredient-category">Humektan</div>
+            <div class="ingredient-name">Glycerin</div>
+            <p>Humektan dasar yang efektif menarik kelembapan ke kulit.</p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Glycerin', '💧', 'Glycerin adalah humektan umum yang sangat efektif dalam menarik air ke kulit, membantu menjaga hidrasi.')"
+            >
+              Detail Pengunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🧂</div>
+            <div class="ingredient-category">Niacin</div>
+            <div class="ingredient-name">Niacin</div>
+            <p>
+              Bentuk aktif niacinamide, lebih poten tetapi berisiko menyebabkan
+              flushing.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Niacin', '🧂', 'Asam nikotinat yang bekerja lebih cepat tetapi mungkin menyebabkan kemerahan sementara.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">⚗️</div>
+            <div class="ingredient-category">Kojic Acid</div>
+            <div class="ingredient-name">Kojic Acid</div>
+            <p>
+              Menghambat produksi melanin, alternatif hydroquinone yang lebih
+              lembut.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Kojic Acid', '⚗️', 'Turunan jamur yang bekerja sebagai inhibitor tirosinase untuk mencerahkan kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🧪</div>
+            <div class="ingredient-category">Zinc PCA</div>
+            <div class="ingredient-name">Zinc PCA</div>
+            <p>
+              Mengontrol produksi minyak berlebih dan mengurangi peradangan
+              jerawat.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Zinc PCA', '🧪', 'Bentuk zinc yang mudah diserap kulit untuk mengontrol sebum dan menenangkan jerawat.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">⭐</div>
+            <div class="ingredient-category">Retinoids</div>
+            <div class="ingredient-name">Retinoids</div>
+            <p>
+              Gold standard anti-aging, meningkatkan produksi kolagen, dan
+              mengatasi jerawat.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Retinoids', '⭐', 'Turunan vitamin A (seperti retinol, retinaldehyde, tretinoin) untuk pergantian sel kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+        </div>
+        <!-- End library-container for Kimiawi -->
+
+        <h2>🌿 Bahan Aktif Alami</h2>
+        <p class="category-description natural-description">
+          Bahan yang mengandung ekstrak tumbuhan atau mineral, bebas sintetik
+          kuat. Lebih aman untuk kulit sensitif tetapi mungkin membutuhkan waktu
+          lebih lama untuk menunjukkan hasil dibanding bahan sintetik.
+        </p>
+        <div class="library-container">
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌵</div>
+            <div class="ingredient-category">Aloe Vera</div>
+            <div class="ingredient-name">Aloe Vera</div>
+            <p>
+              Menenangkan kulit terbakar matahari, melembabkan, dan mempercepat
+              penyembuhan luka.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Aloe Vera', '🌵', 'Gel dari daun lidah buaya yang kaya akan antioksidan dan senyawa penyembuh.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌿</div>
+            <div class="ingredient-category">Tea Tree Oil</div>
+            <div class="ingredient-name">Tea Tree Oil</div>
+            <p>
+              Antibakteri alami untuk mengatasi jerawat, mengurangi peradangan,
+              dan mengontrol minyak.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Tea Tree Oil', '🌿', 'Minyak esensial dengan sifat antibakteri dan anti-inflamasi kuat dari tanaman Melaleuca alternifolia.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍬</div>
+            <div class="ingredient-category">Licorice Extract</div>
+            <div class="ingredient-name">Ekstrak Licorice</div>
+            <p>
+              Menghambat produksi melanin, mencerahkan noda hitam, dan
+              mengurangi iritasi kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Ekstrak Licorice', '🍬', 'Ekstrak akar Glycyrrhiza glabra yang mengandung glabridin sebagai pencerah alami.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🫒</div>
+            <div class="ingredient-category">Pelembap</div>
+            <div class="ingredient-name">Squalane</div>
+            <p>Emolien ringan, melembapkan, mirip sebum alami kulit.</p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Squalane', '🫒', 'Squalane adalah emolien ringan yang sangat mirip dengan minyak alami kulit, memberikan kelembapan tanpa menyumbat pori.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍀</div>
+            <div class="ingredient-category">Centella Asiatica</div>
+            <div class="ingredient-name">Centella Asiatica</div>
+            <p>
+              Menenangkan kulit sensitif, mempercepat penyembuhan luka, dan
+              mengurangi kemerahan.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Centella Asiatica', '🍀', 'Ekstrak tanaman tradisional yang dikenal sebagai penyembuh segala dalam perawatan kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍵</div>
+            <div class="ingredient-category">Antioksidan/Penenang</div>
+            <div class="ingredient-name">Green Tea Extract</div>
+            <p>Antioksidan kuat (EGCG), anti-inflamasi, melindungi kulit.</p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Green Tea Extract', '🍵', 'Ekstrak Teh Hijau kaya akan antioksidan, terutama EGCG, yang melindungi kulit dari kerusakan dan memiliki efek menenangkan.')"
+            >
+              Detail Pengunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌼</div>
+            <div class="ingredient-category">Penenang</div>
+            <div class="ingredient-name">Allantoin</div>
+            <p>Menenangkan iritasi, melembapkan, mendorong regenerasi sel.</p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Allantoin', '🌼', 'Allantoin adalah senyawa yang dikenal karena sifat menenangkan, melembapkan, dan membantu regenerasi kulit.')"
+            >
+              Detail Pengunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌸</div>
+            <div class="ingredient-category">Chamomile</div>
+            <div class="ingredient-name">Chamomile</div>
+            <p>
+              Anti-inflamasi alami, mengurangi kemerahan, dan menenangkan kulit
+              sensitif.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Chamomile', '🌸', 'Ekstrak bunga chamomile yang mengandung bisabolol dan apigenin sebagai anti-iritasi.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍂</div>
+            <div class="ingredient-category">Eksfolian Alami</div>
+            <div class="ingredient-name">Willow Bark Extract</div>
+            <p>
+              Sumber salisin alami (mirip BHA), eksfoliasi lembut,
+              anti-inflamasi.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Willow Bark Extract', '🍂', 'Ekstrak Kulit Willow adalah sumber alami salisin, yang diubah menjadi asam salisilat di kulit, memberikan eksfoliasi lembut.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🧈</div>
+            <div class="ingredient-category">Shea Butter</div>
+            <div class="ingredient-name">Shea Butter</div>
+            <p>
+              Melembabkan intensif, melindungi skin barrier, dan mengurangi
+              iritasi kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Shea Butter', '🧈', 'Lemak alami dari kacang shea Afrika yang kaya akan vitamin A, E, dan F.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌹</div>
+            <div class="ingredient-category">Rosehip Oil</div>
+            <div class="ingredient-name">Rosehip Oil</div>
+            <p>
+              Mengandung retinoid alami, mencerahkan kulit, dan mengurangi tanda
+              penuaan.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Rosehip Oil', '🌹', 'Minyak dari biji tanaman rosehip yang kaya akan vitamin A, C, dan asam lemak esensial.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🧡</div>
+            <div class="ingredient-category">Minyak Bernutrisi</div>
+            <div class="ingredient-name">Sea Buckthorn Oil</div>
+            <p>
+              Kaya antioksidan (Vit C, E, karotenoid), omega, menutrisi kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Sea Buckthorn Oil', '🧡', 'Sea Buckthorn Oil sangat kaya akan antioksidan, vitamin, dan asam lemak, sangat baik untuk nutrisi dan perlindungan kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌿</div>
+            <div class="ingredient-category">Antioksidan/Energizing</div>
+            <div class="ingredient-name">Ginseng Extract</div>
+            <p>
+              Antioksidan, meningkatkan sirkulasi, membantu vitalitas kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Ginseng Extract', '🌿', 'Ekstrak Ginseng dikenal karena sifat antioksidan dan kemampuannya untuk meningkatkan vitalitas kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🐝</div>
+            <div class="ingredient-category">Propolis</div>
+            <div class="ingredient-name">Propolis</div>
+            <p>
+              Antibakteri alami, mempercepat penyembuhan jerawat, dan
+              menenangkan peradangan.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Propolis', '🐝', 'Resin alami yang dikumpulkan lebah dari tumbuhan, kaya akan antioksidan dan senyawa antibakteri.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍇</div>
+            <div class="ingredient-category">Grape Seed Extract</div>
+            <div class="ingredient-name">Ekstrak Biji Anggur</div>
+            <p>
+              Antioksidan kuat, melindungi dari radikal bebas, dan mengencangkan
+              kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Ekstrak Biji Anggur', '🍇', 'Kaya akan proanthocyanidins yang 20x lebih kuat dari vitamin E sebagai antioksidan.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🍯</div>
+            <div class="ingredient-category">Madu</div>
+            <div class="ingredient-name">Madu</div>
+            <p>
+              Antibakteri alami, melembabkan, dan membantu regenerasi kulit.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Madu', '🍯', 'Madu murni dengan sifat humektan, antibakteri, dan penyembuhan luka.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+
+          <div class="ingredient-card">
+            <div class="ingredient-image">🌾</div>
+            <div class="ingredient-category">Oat Extract</div>
+            <div class="ingredient-name">Ekstrak Oat</div>
+            <p>
+              Menenangkan kulit gatal dan iritasi, cocok untuk eksim dan kulit
+              sensitif.
+            </p>
+            <button
+              class="detail-btn"
+              onclick="showDetailModal('Ekstrak Oat', '🌾', 'Ekstrak oat koloidal yang mengandung avenanthramides untuk menenangkan kulit.')"
+            >
+              Detail Penggunaan
+            </button>
+          </div>
+        </div>
+        <!-- End library-container for Alami -->
+      </div>
+    </div>
+
+    <!-- Footer (No changes needed here) -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>SmartSkin Planner</h3>
+          <p>Perencanaan routine skincare berbasis logika sederhana.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Navigasi</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="planner.html">Routine Planner</a></li>
+            <li><a href="scincare.html">Skincare Library</a></li>
+          </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="liblary_scincar.js"></script>
+  </body>
+</html>

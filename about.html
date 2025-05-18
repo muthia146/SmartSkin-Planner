@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartSkin Planner - About</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css_style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <span>SmartSkin Planner</span>
+      </div>
+      <button
+        class="hamburger-menu"
+        id="hamburgerMenu"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <div class="wrapper-kanan"></div>
+      <div class="nav-links" id="navLinksContainer">
+        <a href="index.html" class="nav-link">Dashboard</a>
+        <a href="planner.html" class="nav-link">Routine Planner</a>
+        <a href="scincare.html" class="nav-link">Skincare Library</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="login.html" class="nav-link" id="loginNav">login</a>
+        <!-- Ini akan tampil jika user sudah login -->
+        <div class="user-menu" id="userMenu" style="display: none">
+          <div class="user-name">👤 <span id="usernameDisplay">User</span></div>
+          <div class="user-dropdown">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+          </div>
+        </div>
+        <!-- Ini akan tetap tampil kalau belum login -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- About Page -->
+      <div class="page active" id="about">
+        <h1>💡 Tentang SmartSkin Planner</h1>
+
+        <div class="about-section">
+          <h2>Misi Kami</h2>
+          <p>
+            Website ini dikembangkan untuk membantu pengguna skincare aktif
+            dalam merencanakan rutinitas perawatan yang lebih teratur dan
+            efisien. Kami hadir untuk memudahkan Anda dalam menentukan waktu
+            penggunaan produk agar hasilnya lebih optimal.
+          </p>
+        </div>
+
+        <div class="about-section">
+          <h2>Konsep Dasar SmartSkin Planner</h2>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: 20px;
+            "
+          >
+            <div class="info-card">
+              <h3>Deret Aritmatika untuk Penjadwalan</h3>
+              <p>
+                Menentukan interval pemakaian awal berdasarkan
+                <strong>toleransi kulit Anda dan konsentrasi produk</strong>.
+                Interval ini akan sedikit bertambah pada pemakaian berikutnya.
+              </p>
+              <p>
+                Contoh: Jika toleransi rendah & konsentrasi tinggi, interval
+                awal lebih panjang. Jika toleransi tinggi & konsentrasi rendah,
+                interval awal lebih pendek.
+              </p>
+              <p>
+                <code>Interval Awal ≈ floor(5 - Tol/2) + KonsentrasiAdj</code>
+              </p>
+            </div>
+            <div class="info-card">
+              <h3>Estimasi Efek & Toleransi</h3>
+              <p>
+                Memberikan gambaran kasar potensi penumpukan efek dan batas
+                pemakaian berturut-turut berdasarkan toleransi dan konsentrasi.
+              </p>
+              <p>
+                <code>Rasio Efek ≈ 1 + (Konsentrasi * Toleransi) / 50</code>
+              </p>
+              <p>
+                <code>Maks. Pemakaian Beruntun ≈ ceil(Toleransi / 3)</code>
+                (maksimal 3)
+              </p>
+              <p>
+                <i
+                  >Ini adalah model sederhana, reaksi kulit asli bisa
+                  bervariasi.</i
+                >
+              </p>
+            </div>
+            <div class="info-card">
+              <h3>Pentingnya Konsistensi & Observasi</h3>
+              <p>
+                Jadwal ini memberikan titik awal. Yang terpenting adalah
+                mengamati reaksi kulit Anda dan menyesuaikan frekuensi jika
+                perlu.
+              </p>
+              <p>
+                Gunakan Skincare Library untuk mempelajari lebih lanjut tentang
+                bahan aktif yang Anda gunakan.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <h2>Tim Kami</h2>
+          <div class="team-members">
+            <div class="team-card">
+              <img
+                src="https://i.imgur.com/gFxH84D.jpeg"
+                alt="Team Member"
+                class="team-avatar"
+              />
+              <h3>Nabila Aprilianti</h3>
+              <p>247006111028</p>
+            </div>
+            <div class="team-card">
+              <img
+                src="https://i.imgur.com/ungeVMn.jpeg"
+                alt="Team Member"
+                class="team-avatar"
+              />
+              <h3>Muthia Anggraeni R</h3>
+              <p>247006111029</p>
+            </div>
+            <div class="team-card">
+              <img
+                src="https://i.imgur.com/9VmDIdu.jpeg"
+                alt="Team Member"
+                class="team-avatar"
+              />
+              <h3>Astri Rahmawati</h3>
+              <p>247006111039</p>
+            </div>
+            <div class="team-card">
+              <img
+                src="https://i.imgur.com/U9EkOMS.jpeg"
+                alt="Team Member"
+                class="team-avatar"
+              />
+              <h3>Nayla Qurrota Aini</h3>
+              <p>247006111043</p>
+            </div>
+            <div class="team-card">
+              <img
+                src="https://i.imgur.com/ow6VfXZ.jpeg"
+                alt="Team Member"
+                class="team-avatar"
+              />
+              <h3>Winda fuzi Azahra</h3>
+              <p>247006111054</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Alert Notification -->
+    <div id="customAlertOverlay" class="custom-alert-overlay">
+      <div id="customAlertBox" class="custom-alert-box">
+        <h4 id="customAlertTitle"><span class="icon">⚠️</span>Peringatan</h4>
+        <p id="customAlertMessage">Ini adalah pesan peringatan default.</p>
+        <button id="customAlertClose" class="btn-alert-close">Mengerti</button>
+      </div>
+    </div>
+    <!-- End Custom Alert Notification -->
+
+    <!-- Footer (No changes needed here) -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>SmartSkin Planner</h3>
+          <p>Perencanaan routine skincare berbasis logika sederhana.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Navigasi</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="planner.html">Routine Planner</a></li>
+            <li><a href="scincare.html">Skincare Library</a></li>
+          </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/liblary_scincar.js"></script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartSkin Planner - Routine & Library</title>
+    <!-- Include libraries (Optional, only if using advanced export later) -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css_style.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo">
+        <div class="logo-icon">S</div>
+        <span>SmartSkin Planner</span>
+      </div>
+      <button
+        class="hamburger-menu"
+        id="hamburgerMenu"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <div class="wrapper-kanan"></div>
+      <div class="nav-links" id="navLinksContainer">
+        <a href="index.html" class="nav-link">Dashboard</a>
+        <a href="planner.html" class="nav-link">Routine Planner</a>
+        <a href="scincare.html" class="nav-link">Skincare Library</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="login.html" class="nav-link" id="loginNav">login</a>
+        <!-- Ini akan tampil jika user sudah login -->
+        <div class="user-menu" id="userMenu" style="display: none">
+          <div class="user-name">👤 <span id="usernameDisplay">User</span></div>
+          <div class="user-dropdown">
+            <button class="logout-btn" onclick="logout()">Logout</button>
+          </div>
+        </div>
+        <!-- Ini akan tetap tampil kalau belum login -->
+      </div>
+    </nav>
+
+    <div id="modalOverlay" class="modal-overlay" style="display: none"></div>
+    <!-- Modal for Library Details -->
+    <div id="detailModal" class="detail-modal" style="display: none">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">
+            <span id="modalIcon" class="modal-icon"></span>
+            <span id="modalTitle"></span>
+          </h2>
+          <span class="close-modal" onclick="closeModal()">×</span>
+        </div>
+
+        <div id="modalDescription" class="ingredient-detail"></div>
+
+        <div class="detail-section">
+          <h3>Manfaat Utama</h3>
+          <ul id="modalBenefits" class="benefits-list"></ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>Cara Penggunaan</h3>
+          <ul id="modalUsage" class="usage-list"></ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>Hal yang Perlu Diperhatikan</h3>
+          <ul id="modalWarnings" class="avoid-list"></ul>
+        </div>
+
+        <div class="highlight-box">
+          <p id="modalTips"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Home Page -->
+      <div class="page active" id="home">
+        <section class="hero">
+          <h1>Optimalkan Rutin Skincare Anda</h1>
+          <p>
+            Gunakan pendekatan matematis untuk menjadwalkan pemakaian bahan
+            aktif dan memahami potensi efeknya pada kulit Anda.
+          </p>
+          <a
+            href="planner.html"
+            class="btn-primary"
+            style="
+              display: inline-block;
+              background-color: white;
+              color: var(--primary);
+              padding: 12px 20px;
+              border-radius: 8px;
+              font-weight: 600;
+              text-decoration: none;
+              transition: all 0.3s;
+            "
+          >
+            Mulai Rencanakan
+          </a>
+        </section>
+      </div>
+    </div>
+
+    <!-- Footer (No changes needed here) -->
+    <footer>
+      <div class="footer-content">
+     <div class="footer-column nav-column">
+          <h3>SmartSkin Planner</h3>
+          <p>Perencanaan routine skincare berbasis logika sederhana.</p>
+        </div>
+        <div class="footer-column nav-column">
+          <h3>Navigasi</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="planner.html">Routine Planner</a></li>
+            <li><a href="scincare.html">Skincare Library</a></li>
+          </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="liblary_scincar.js"></script>
+  </body>
+</html>
