@@ -1071,6 +1071,12 @@ function updateNavbarForLoggedInUser(username) {
 
       // --- Save/Load Logic (No changes needed) ---
       function saveRoutineData() {
+        if (!localStorage.getItem("isLoggedIn")) {
+          showAlert("Anda harus login untuk menyimpan data.", "Akses Ditolak", "danger");
+          return;
+        }
+      
+        // Lanjutkan proses simpan...
         const selectedCheckboxes = document.querySelectorAll(
           '#ingredient-checkboxes input[type="checkbox"]:checked'
         );
@@ -1078,14 +1084,14 @@ function updateNavbarForLoggedInUser(username) {
         selectedCheckboxes.forEach((checkbox) =>
           selectedIngredientValues.push(checkbox.value)
         );
-
+      
         const dataToSave = {
-          ingredients: selectedIngredientValues, // Save array of values
+          ingredients: selectedIngredientValues,
           concentration: document.getElementById("concentration").value,
           startDay: document.getElementById("startDay").value,
           tolerance: document.getElementById("tolerance").value,
         };
-
+      
         try {
           localStorage.setItem("smartSkinRoutine", JSON.stringify(dataToSave));
           showAlert("Data routine berhasil disimpan!", "Sukses", "success");
@@ -1100,6 +1106,11 @@ function updateNavbarForLoggedInUser(username) {
       }
 
       function loadRoutineData() {
+        if (!localStorage.getItem("isLoggedIn")) {
+          showAlert("Anda harus login untuk memuat data.", "Akses Ditolak", "danger");
+          return;
+        }
+        
         const savedData = localStorage.getItem("smartSkinRoutine");
         if (savedData) {
           try {
