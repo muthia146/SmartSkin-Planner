@@ -1104,6 +1104,7 @@ function updateNavbarForLoggedInUser(username) {
           );
         }
       }
+      
 
       function loadRoutineData() {
         if (!localStorage.getItem("isLoggedIn")) {
